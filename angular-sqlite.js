@@ -462,6 +462,18 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 		 *        { id: 1, name: 'test' }
 		 *        [{ id: 1, name: 'test' }, { id: 2, name: 'foo' }]Finish!');
 		 */
+		insert_or_replace: function (table, data) {
+			return insert_replace.call(this, 'INSERT OR REPLACE', table, data);
+		},
+
+		/**
+		 * Insert.
+		 *
+		 * @param {String} table Table name.
+		 * @param {Object|Array} data Column data.
+		 *        { id: 1, name: 'test' }
+		 *        [{ id: 1, name: 'test' }, { id: 2, name: 'foo' }]Finish!');
+		 */
 		insert: function (table, data) {
 			return insert_replace.call(this, 'INSERT', table, data);
 		},
