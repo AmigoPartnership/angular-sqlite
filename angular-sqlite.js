@@ -89,7 +89,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 				sql += c + ') VALUES (' + v + ')';
 
-				console.log('$SQLite', 'insert_replace', sql, d);
+				// console.log('$SQLite', 'insert_replace', sql, d);
 
 				// Execute
 				tx.executeSql(sql, d,
@@ -104,7 +104,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 	return {
 		dbConfig: function (dbCfg) {
-			console.log('$SQLite', 'dbConfig', arguments);
+			// console.log('$SQLite', 'dbConfig', arguments);
 
 			if (!dbCfg) dbCfg = {};
 
@@ -305,7 +305,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 			_db.transaction(function (tx) {
 				var sql = 'DROP TABLE IF EXISTS ' + table;
-				console.log('$SQLite', 'dropTable', sql);
+				// console.log('$SQLite', 'dropTable', sql);
 				tx.executeSql(sql, [],
 					function (tx, results) { deferred.resolve(results); },
 					function (tx, error) { console.error(error); deferred.reject(error); });
@@ -329,7 +329,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 			sql = '' + sql;
 			_db.transaction(function (tx) {
 				params = prepareParams(params);
-				console.log('$SQLite', 'execute', sql, params);
+				// console.log('$SQLite', 'execute', sql, params);
 				tx.executeSql(sql, params,
 					function (tx, results) { deferred.resolve(results); },
 					function (tx, error) { console.error(error); deferred.reject(error); });
@@ -354,7 +354,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 			_db.transaction(function (tx) {
 				params = prepareParams(params);
-				console.log('$SQLite', 'select', sql, params);
+				// console.log('$SQLite', 'select', sql, params);
 				tx.executeSql(sql, params, function (tx, results) {
 					var len = results.rows.length, i;
 
@@ -394,7 +394,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 			_db.transaction(function (tx) {
 				params = prepareParams(params);
-				console.log('$SQLite', 'selectFirst', sql, params);
+				// console.log('$SQLite', 'selectFirst', sql, params);
 				tx.executeSql(sql, params, function (tx, results) {
 					var len = results.rows.length;
 					if (len > 0) {
@@ -430,7 +430,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 			_db.transaction(function (tx) {
 				params = prepareParams(params);
-				console.log('$SQLite', 'selectAll', sql, params);
+				// console.log('$SQLite', 'selectAll', sql, params);
 				tx.executeSql(sql, params, function (tx, results) {
 					var len = results.rows.length, i;
 					if (len > 0) {
@@ -501,7 +501,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 
 			_db.transaction(function (tx) {
 				var sql = "SELECT name FROM sqlite_master WHERE type='table' AND name=?;";
-				console.log('$SQLite', 'tableExists', sql, tableName);
+				// console.log('$SQLite', 'tableExists', sql, tableName);
 				tx.executeSql(
 					sql, [ tableName ],
 					function (tx, results) { deferred.resolve(results); },
@@ -513,7 +513,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 		},
 
 		init: function (initFn) {
-			console.log('$SQLite', 'init', 'start');
+			// console.log('$SQLite', 'init', 'start');
 			var _ = this,
 				stepCount = 1;
 			_.init = _.ready;
@@ -534,14 +534,14 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 			}
 
 			_initDeferred.promise.then(function () {
-				console.log('$SQLite', 'init', 'ready');
+				// console.log('$SQLite', 'init', 'ready');
 				_db_initialited = true;
 				if (_initFns.length) {
 					for (var i = 0; i < _initFns.length; i++) {
 						_initFns[i].apply(_);
 					}
 				}
-				console.log('$SQLite', 'init', 'finish');
+				// console.log('$SQLite', 'init', 'finish');
 			});
 
 			return this;
