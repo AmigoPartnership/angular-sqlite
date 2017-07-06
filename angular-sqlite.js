@@ -144,7 +144,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 				// Build
 				var sql = "";
 				if (definition.__virtual) {
-					sql = "CREATE VIRTUAL TABLE IF NOT EXISTS " + table + " USING FTS4(";
+					sql = "CREATE VIRTUAL TABLE IF NOT EXISTS " + table + " USING FTS3(";
 				} else {
 					sql = "CREATE TABLE IF NOT EXISTS " + table + " (";
 				}
@@ -155,7 +155,7 @@ angular.module('ngSQLite', []).factory('$SQLite', ['$q', function ($q) {
 						tableEmpty = result && result.rows && (result.rows.length > 0);
 
 						angular.forEach(definition, function (d, c) {
-							if (c !== '__dropTable' || c !== '__virtual') {
+							if (["__dropTable", "__virtual"].indexOf(c) === -1) {
 								if (f) {
 									f = false;
 								} else {
